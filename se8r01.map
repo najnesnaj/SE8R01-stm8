@@ -44,12 +44,12 @@ CABS                                00000000    00000000 =           0. bytes (A
      00000083  l_HOME                          
      00000100  l_IRAM                          
      00000100  l_SSEG                          
-     00000A4A  l_CODE                          
+     000009AD  l_CODE                          
      00008000  s_HOME                          
      00008083  s_GSINIT                        
      0000809D  s_GSFINAL                       
      000080A0  s_CODE                          
-     00008AEA  s_INITIALIZER                   
+     00008A4D  s_INITIALIZER                   
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
@@ -60,7 +60,7 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000000  .__.ABS.                           _mulint
+     00000000  .__.ABS.                           _memset
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
@@ -150,7 +150,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CODE                                000080A0    00000A4A =        2634. bytes (REL,CON)
+CODE                                000080A0    000009AD =        2477. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -180,13 +180,15 @@ CODE                                000080A0    00000A4A =        2634. bytes (R
      00008665  _SE8R01_Analog_Init                se8r01
      000087E1  _SE8R01_Init                       se8r01
      000088C7  _main                              se8r01
-     00008A94  __mulint                           _mulint
+     000089D8  __mulint                           _mulint
+     00008A2E  _memset                            _memset
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-INITIALIZER                         00008AEA    0000005A =          90. bytes (REL,CON)
+INITIALIZER                         00008A4D    0000005A =          90. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -200,6 +202,7 @@ se8r01.rel                                [  ]
 Libraries Linked                          [ object file ]
 
 /usr/bin/../share/sdcc/lib/stm8/stm8.lib  [ _mulint.rel ]
+/usr/bin/../share/sdcc/lib/stm8/stm8.lib  [ _memset.rel ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
 

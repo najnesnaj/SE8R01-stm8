@@ -1,3 +1,22 @@
+/*
+connection se8r01 -- stm8s   (see also jpg pictures)
+
+ 
+1 VCC
+2 GND
+3 CE      PC4
+4 CSN     PC3
+5 SCK     PC5
+6 MOSI    PC6
+7 MISO    PC7
+8 IRQ     PD3
+*/
+
+
+
+
+
+
 #include "stm8.h"
 #include "API.h"
 #include <string.h>
@@ -577,240 +596,58 @@ write_spi_buf(iRF_CMD_WRITE_REG|iRF_BANK0_RF_SETUP,temp,1);
 
 }
 
-/*
-
-  init_io();                        // Initialize IO port
-  write_spi_reg(FLUSH_RX,0); 
-  unsigned char status=SPI_Read(STATUS);
-  Serial.print("status = ");    
-  Serial.println(status,HEX);     
-  Serial.println("*******************Radio starting*****************");
-
- SE8R01_Init();
-
-  if(digitalRead(IRQq)==LOW)
-  {
-//todo    delayMicroseconds(240);
-delayTenMicro();
-delayTenMicro();
-delayTenMicro();
-delayTenMicro();
-
-    signal_lv=SPI_Read(iRF_BANK0_RPD);
-    status = SPI_Read(STATUS);
-    
-    if(status&STA_MARK_RX)                                                 // if receive data ready (TX_DS) interrupt
-    {   
-      
-      pip= (status&0b00001110)>>1;
-      pload_width_now=SPI_Read(iRF_CMD_R_RX_PL_WID);
-      SPI_Read_Buf(RD_RX_PLOAD, rx_buf,pload_width_now);             // read playload to rx_buf
-      write_spi_reg(FLUSH_RX,0); 
-      print_pip();
-      newdata=1;
-      }
-   
-    write_spi_reg(WRITE_REG+STATUS,status);       // clear RX_DR or TX_DS or MAX_RT interrupt flag
-  
-  }
-   
-    
-  
-  if(newdata==1)
-  {
-  newdata=0;
-  if(pip==0)
-  {
-     unsigned long T_counter=0;
-T_counter = (unsigned long)rx_buf[3] << 24;
-T_counter += (unsigned long)rx_buf[2] << 16;
-T_counter += (unsigned long)rx_buf[1] << 8;
-T_counter += (unsigned long)rx_buf[0];
-
- Serial.print(" transmission counter: ");
- Serial.print(T_counter);
- 
-     Serial.print(" rt packets: ");
-   Serial.print(rx_buf[4]&B00001111);
-  }
-  
-  
-  if(pip==1)
-  {
-  
-  
-  }
-  
-  
-  else if(pip==2)
-  {
-  
-  }
-  
-  else if(pip==3)
-  {
-   
-  } 
-   
-   
-  
- else if(pip==4)
-  {
- memcpy(&myData_pip4, rx_buf, sizeof(myData_pip4));
- Serial.print(" transmission counter: ");
- Serial.print(myData_pip4.counter);
- Serial.print(" rt packets: ");
- Serial.print(myData_pip4.rt&B00001111);
-
-    }
-    
-  
-    else if(pip==5)
-  {
-
- memcpy(&myData_pip5, rx_buf, sizeof(myData_pip5));
- Serial.print(" transmission counter: ");
- Serial.print(myData_pip5.counter);
- Serial.print(" rt packets: ");
- Serial.print(myData_pip5.rt&B00001111);
-
-  }
-  
-  
-  Serial.println("");
-  
-  }
-  }
-  
-}
-
-
- void print_pip()
- {
-  if(pip>5)
-   {
-   Serial.println("NO Data"); 
-   }
-   else{
-   Serial.print(" SS= ");
-   Serial.print(signal_lv,DEC);
-   Serial.print("  pip: ");    
-   Serial.print(pip);
-   Serial.print(" ");
-   Serial.print("rx buff with= ");
-   Serial.print(pload_width_now);
-   Serial.print(" data= ");
-      for(UCHAR i=0; i<pload_width_now; i++)
-      {
-          Serial.print(" ");
-          Serial.print(rx_buf[i]);                              // print rx_buf
-      }
-     Serial.print("  ");
- }}
- 
-*/
 
 
 int main () {
-int i;
    short voltage = 1900;
-   UCHAR x, a;
    UCHAR rx_addr_p1[]  = { 0xd2, 0xf0, 0xf0, 0xf0, 0xf0 };
    UCHAR tx_addr[]     = { 0xe1, 0xf0, 0xf0, 0xf0, 0xf0 };
    UCHAR tx_payload[33];
-  UCHAR readstatus;
-   volatile int reg, x1, y1, z1;
+   UCHAR readstatus;
+   volatile int x1, y1, z1;
    InitializeSystemClock();
    InitializeUART();
-   InitializeI2C();
+//   InitializeI2C();
    InitializeSPI ();
-/*
-// Get the NRF24L01 ready
-   reg = write_spi_reg (W_REGISTER + SETUP_AW, AW5);
-   reg = write_spi_buf (W_REGISTER + TX_ADDR, tx_addr, 5);
-   reg = write_spi_buf (W_REGISTER + RX_ADDR_P0, tx_addr, 5);
-   reg = write_spi_buf (W_REGISTER + RX_ADDR_P1, rx_addr_p1, 5);
-   reg = write_spi_reg (W_REGISTER + EN_AA, ENAA_P5 | ENAA_P4 | ENAA_P3 | ENAA_P2 | ENAA_P1 | ENAA_P0);
-   reg = write_spi_reg (W_REGISTER + EN_RXADDR, ERX_P5 | ERX_P4 | ERX_P3 | ERX_P2 | ERX_P1 | ERX_P0);
-   reg = write_spi_reg (W_REGISTER + SETUP_RETR, ARD4000 | ARC15);
-   reg = write_spi_reg (W_REGISTER + RF_CH, 92);
-   reg = write_spi_reg (W_REGISTER + RF_SETUP, RF_DR_LOW | RF_PWR_MED | 1);
-   reg = write_spi_reg (W_REGISTER + CONFIG, EN_CRC | CRCO | PWR_UP | PTX);
-   delay(1); // KEF confirmed needed!
 
- //  x = i2c_read_register (BMP180_ADDR, 0xd0);
- //  memset (tx_payload, 0, sizeof(tx_payload));
-*/
+
+   memset (tx_payload, 0, sizeof(tx_payload));
+
+
   init_io();                        // Initialize IO port
-  SE8R01_Init();
-  write_spi_reg(FLUSH_RX,0);
+  write_spi_reg(FLUSH_TX,0); // transmit -- send data 
   readstatus = read_spi_reg(CONFIG);
   UARTPrintF("config = \n\r");
   print_UCHAR_hex(readstatus);
   readstatus = read_spi_reg(STATUS);
   UARTPrintF("status = \n\r");
- print_UCHAR_hex(readstatus);
+  print_UCHAR_hex(readstatus);
 
+  SE8R01_Init();
 
 
 
 while (1) {
-// Load the calibration data from the BMP180
-//   for (a = 0xaa; a <= 0xbf; ++a) {
-//      x = i2c_read_register (BMP180_ADDR, a);
-//      tx_payload[a - 0xaa] = x;
-//   }
 
    tx_payload[0] = 0xf0;
    tx_payload[1] = 0x01;
-
-   
-
-//   write_spi_reg (W_REGISTER + STATUS, RX_DR | TX_DS | MAX_RT);
-   // reg = write_spi_reg (FLUSH_TX, 0);
- //  delayTenMicro();
-//   reg = write_spi_buf (W_TX_PAYLOAD, tx_payload, 32);
-   delayTenMicro();
-   PC_ODR |= (1 << CE);
-   delayTenMicro();
-   PC_ODR &= ~(1 << CE);
-//todo 
-
-
-
-PD_DDR |= ~(1 << 5); // input mode
-PD_CR1 |= (1 << 5); // input with pull up
-PD_CR2 &= ~(1 << 5); // interrupt disabled
-
-
-//if(digitalRead(IRQq)==LOW) PD_ODR = 0
-if ((PD_IDR & 0b00001000) == 0b00001000)
-{
-  UARTPrintF("interrupt low = \n\r");
-
-if(     ( readstatus & (RX_DR | TX_DS | MAX_RT) ) != 0  ){
-read_spi_buf(RD_RX_PLOAD, tx_payload, 1);
-for(i=0;i<32;i++) print_UCHAR_hex(tx_payload[i]); 
-  UARTPrintF("data \n\r");
-}
-}
-else
-{
-  UARTPrintF("interrupt high = \n\r");
-} 
+   tx_payload[2] = 0x33;
+write_spi_buf(iRF_CMD_WR_TX_PLOAD, tx_payload, 32);
+write_spi_reg(WRITE_REG+STATUS, 0xff);
 // Delay before looping back
    for (x1 = 0; x1 < 50; ++x1)
       for (y1 = 0; y1 < 50; ++y1)
          for (z1 = 0; z1 < 50; ++z1)
             __asm__("nop");
 
- readstatus = read_spi_reg(CONFIG);
-  UARTPrintF("config = \n\r");
-  print_UCHAR_hex(readstatus);
-  readstatus = read_spi_reg(STATUS);
-  UARTPrintF("status = \n\r");
- print_UCHAR_hex(readstatus);
-
+/*
+ myData.rt=SPI_Read(OBSERVE_TX);        //count resends
+  Serial.print("status ");
+  Serial.print(status,HEX);
+  Serial.print(" rt packets: ");
+  Serial.println(myData.rt&B00001111);
+myData.counter++;
+*/
 
 }
 }

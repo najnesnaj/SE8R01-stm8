@@ -24,11 +24,8 @@ Symbol Table
   2 _SE8R01_DR_500K                                                000004 GR
   8 _SE8R01_Init                                                   000741 GR
   8 _UARTPrintF                                                    00026C GR
-  8 ___str_0                                                       0009AD R
-  8 ___str_1                                                       0009B9 R
-  8 ___str_2                                                       0009C5 R
-  8 ___str_3                                                       0009D8 R
-  8 ___str_4                                                       0009E0 R
+  8 ___str_0                                                       000920 R
+  8 ___str_1                                                       00092C R
   5 __interrupt_vect                                               000000 R
     __mulint                                                       ****** GX
   6 __sdcc_gs_init_startup                                         000000 R
@@ -58,16 +55,17 @@ Symbol Table
   8 _i2c_read_register                                             0002CF GR
   8 _i2c_send_address                                              00021C GR
   8 _i2c_send_reg                                                  0001FA GR
+  8 _i2c_set_nak                                                   0001EA GR
+  8 _i2c_set_start_ack                                             00025E GR
+  8 _i2c_set_stop                                                  0001F2 GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8), page 2.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-  8 _i2c_set_nak                                                   0001EA GR
-  8 _i2c_set_start_ack                                             00025E GR
-  8 _i2c_set_stop                                                  0001F2 GR
   8 _init_io                                                       0003BD GR
   8 _main                                                          000827 GR
+    _memset                                                        ****** GX
   1 _myData_pip4                                                   00000A GR
   1 _myData_pip5                                                   000005 GR
   2 _newdata                                                       000008 GR
@@ -105,7 +103,7 @@ Area Table
    5 HOME                                       size     83   flags    0
    6 GSINIT                                     size     1A   flags    0
    7 GSFINAL                                    size      3   flags    0
-   8 CODE                                       size    9F4   flags    0
+   8 CODE                                       size    938   flags    0
    9 INITIALIZER                                size     5A   flags    0
    A CABS                                       size      0   flags    8
 

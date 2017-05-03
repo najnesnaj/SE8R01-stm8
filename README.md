@@ -4,6 +4,8 @@ I ordered SE8R01 thinking it was a NRF24
 I found some arduino software which I ported to stm8
 
 
+this is work in progress ...
+
 As far as software packages, you'll need at the very least, the SDCC compiler and a way to u
 pload the resulting IHX file to the device:
 
