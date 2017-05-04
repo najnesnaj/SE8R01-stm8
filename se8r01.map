@@ -38,18 +38,18 @@ CABS                                00000000    00000000 =           0. bytes (A
      0000001A  l_GSINIT                        
      00000020  s_BSEG_BYTES                    
      00000020  s__CODE                         
-     0000005A  l_INITIALIZED                   
-     0000005A  l_INITIALIZER                   
+     0000005E  l_INITIALIZED                   
+     0000005E  l_INITIALIZER                   
      00000080  l_DSEG                          
      00000083  l_HOME                          
      00000100  l_IRAM                          
      00000100  l_SSEG                          
-     000009AD  l_CODE                          
+     00000876  l_CODE                          
      00008000  s_HOME                          
      00008083  s_GSINIT                        
      0000809D  s_GSFINAL                       
      000080A0  s_CODE                          
-     00008A4D  s_INITIALIZER                   
+     00008916  s_INITIALIZER                   
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
@@ -97,7 +97,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-INITIALIZED                         00000010    0000005A =          90. bytes (REL,CON)
+INITIALIZED                         00000010    0000005E =          94. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -109,14 +109,15 @@ INITIALIZED                         00000010    0000005A =          90. bytes (R
      0000001A  _signal_lv                         se8r01
      0000001B  _pip                               se8r01
      0000001D  _status                            se8r01
-     0000001E  _ADDRESS2                          se8r01
-     0000001F  _ADDRESS3                          se8r01
-     00000020  _ADDRESS4                          se8r01
-     00000021  _ADDRESS5                          se8r01
-     00000022  _ADDRESS1                          se8r01
-     00000026  _ADDRESS0                          se8r01
-     0000002A  _rx_buf                            se8r01
-     0000004A  _tx_buf                            se8r01
+     0000001E  _TX_ADDRESS                        se8r01
+     00000022  _ADDRESS2                          se8r01
+     00000023  _ADDRESS3                          se8r01
+     00000024  _ADDRESS4                          se8r01
+     00000025  _ADDRESS5                          se8r01
+     00000026  _ADDRESS1                          se8r01
+     0000002A  _ADDRESS0                          se8r01
+     0000002E  _rx_buf                            se8r01
+     0000004E  _tx_buf                            se8r01
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
@@ -150,7 +151,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CODE                                000080A0    000009AD =        2477. bytes (REL,CON)
+CODE                                000080A0    00000876 =        2166. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -163,32 +164,24 @@ CODE                                000080A0    000009AD =        2477. bytes (R
      000081BC  _InitializeSPI                     se8r01
      000081E4  _InitializeSystemClock             se8r01
      0000822E  _delay                             se8r01
-     00008279  _i2c_read                          se8r01
-     0000828A  _i2c_set_nak                       se8r01
-     00008292  _i2c_set_stop                      se8r01
-     0000829A  _i2c_send_reg                      se8r01
-     000082BC  _i2c_send_address                  se8r01
-     000082FE  _i2c_set_start_ack                 se8r01
-     0000830C  _UARTPrintF                        se8r01
-     00008323  _print_UCHAR_hex                   se8r01
-     0000836F  _i2c_read_register                 se8r01
-     000083B1  _InitializeI2C                     se8r01
-     000083E4  _InitializeUART                    se8r01
-     0000845D  _init_io                           se8r01
-     00008488  _rf_switch_bank                    se8r01
-     000084A5  _SE8R01_Calibration                se8r01
-     00008665  _SE8R01_Analog_Init                se8r01
-     000087E1  _SE8R01_Init                       se8r01
-     000088C7  _main                              se8r01
-     000089D8  __mulint                           _mulint
-     00008A2E  _memset                            _memset
+     00008279  _UARTPrintF                        se8r01
+     00008290  _print_UCHAR_hex                   se8r01
+     000082DC  _InitializeUART                    se8r01
+     00008355  _init_io                           se8r01
+     00008380  _rf_switch_bank                    se8r01
+     0000839D  _SE8R01_Calibration                se8r01
+     00008569  _SE8R01_Analog_Init                se8r01
+     000086E5  _SE8R01_Init                       se8r01
+     0000878A  _main                              se8r01
+     000088A1  __mulint                           _mulint
+     000088F7  _memset                            _memset
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-INITIALIZER                         00008A4D    0000005A =          90. bytes (REL,CON)
+INITIALIZER                         00008916    0000005E =          94. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
